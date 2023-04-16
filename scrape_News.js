@@ -49,7 +49,7 @@ const Scrape_News = async (res, DATA_NEWS) => {
     }
     catch (err) {
         console.log(err);
-        console.log("Faield to retrieve data");
+        res.send("Failed to retrieve data");
 
     }
     finally {

@@ -50,7 +50,7 @@ const Scrape_Tools = async (res, DATA_AI) => {
     }
     catch (err) {
         console.log(err);
-        console.log("Failed to retrieve data");
+        res.send("Failed to retrieve data");
     }
     finally {
         await browser.close();
