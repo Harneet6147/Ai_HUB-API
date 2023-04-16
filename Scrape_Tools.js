@@ -36,7 +36,7 @@ const Scrape_Tools = async (res, DATA_AI) => {
             "--single-process",
             "--no-zygote",
         ],
-        headless: false,
+        headless: true,
         defaultViewport: false,
         executablePath: process.env.NODE_ENV === 'production'
             ? process.env.PUPPETEER_EXECUTABLE_PATH

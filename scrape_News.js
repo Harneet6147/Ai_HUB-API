@@ -35,7 +35,7 @@ const Scrape_News = async (res, DATA_NEWS) => {
             "--no-zygote",
         ],
 
-        headless: false,
+        headless: true,
         defaultViewport: false,
         executablePath: process.env.NODE_ENV === 'production'
             ? process.env.PUPPETEER_EXECUTABLE_PATH
