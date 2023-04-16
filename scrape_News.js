@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer');
 const URL_FOR_AI_NEWS = 'https://www.futurepedia.io/news?time=All+Time&sort=New';
 
-const scrapeInfiniteItems_news = async (page, itemTargetCount,DATA_NEWS,res) => {
+const scrapeInfiniteItems_news = async (page, itemTargetCount, DATA_NEWS, res) => {
 
     while (itemTargetCount > DATA_NEWS.length) {
 
@@ -23,28 +23,37 @@ const scrapeInfiniteItems_news = async (page, itemTargetCount,DATA_NEWS,res) => 
     res.json(DATA_NEWS);
 }
 
-const Scrape_News = async (res,DATA_NEWS) => {
+const Scrape_News = async (res, DATA_NEWS) => {
 
-    const browser = await puppeteer.launch({
-        args: [
-            "--disable-setuid-sandbox",
-            "--no-sandbox",
-            "--single-process",
-            "--no-zygote",
-        ],
+    try {
+        const browser = await puppeteer.launch({
+            args: [
+                "--disable-setuid-sandbox",
+                "--no-sandbox",
+                "--single-process",
+                "--no-zygote",
+            ],
 
-        headless: false,
-        defaultViewport: false,
-        executablePath: process.env.NODE_ENV === 'production'
-            ? process.env.PUPPETEER_EXECUTABLE_PATH
-            : puppeteer.executablePath(),
-    });
-    const page = await browser.newPage();
+            headless: false,
+            defaultViewport: false,
+            executablePath: process.env.NODE_ENV === 'production'
+                ? process.env.PUPPETEER_EXECUTABLE_PATH
+                : puppeteer.executablePath(),
+        });
+        const page = await browser.newPage();
 
-    // For Getting the News
-    await page.goto(URL_FOR_AI_NEWS);
-    await scrapeInfiniteItems_news(page, 100,DATA_NEWS,res);
-    await browser.close();
+        // For Getting the News
+        await page.goto(URL_FOR_AI_NEWS);
+        await scrapeInfiniteItems_news(page, 100, DATA_NEWS, res);
+    }
+    catch (err) {
+        console.log(err);
+        console.log("Faield to retrieve data");
+
+    }
+    finally {
+        await browser.close();
+    }
 }
 
 module.exports = { Scrape_News };
