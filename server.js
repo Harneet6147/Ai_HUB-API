@@ -57,8 +57,18 @@ const scrapeInfiniteItems_tools = async (page, itemTargetCount) => {
 async function run1() {
 
     const browser = await puppeteer.launch({
+        args: [
+            "--disable-setuid-sandbox",
+            "--no-sandbox",
+            "--single-process",
+            "--no-zygote",
+        ],
+
         headless: false,
-        defaultViewport: false
+        defaultViewport: false,
+        executablePath: process.env.NODE_ENV === 'production'
+            ? process.env.PUPPETEER_EXECUTABLE_PATH
+            : puppeteer.executablePath(),
     });
     const page = await browser.newPage();
 
@@ -71,8 +81,17 @@ async function run1() {
 async function run2() {
 
     const browser = await puppeteer.launch({
+        args: [
+            "--disable-setuid-sandbox",
+            "--no-sandbox",
+            "--single-process",
+            "--no-zygote",
+        ],
         headless: false,
-        defaultViewport: false
+        defaultViewport: false,
+        executablePath: process.env.NODE_ENV === 'production'
+            ? process.env.PUPPETEER_EXECUTABLE_PATH
+            : puppeteer.executablePath(),
     });
     const page = await browser.newPage();
 
