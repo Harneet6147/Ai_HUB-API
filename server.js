@@ -1,6 +1,6 @@
 const express = require('express');
 const puppeteer = require('puppeteer');
-const env = require('dotenv').config();
+require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 3000;
 const URL_FOR_AI_TOOLS = 'https://www.futurepedia.io';
@@ -52,10 +52,9 @@ const scrapeInfiniteItems_tools = async (page, itemTargetCount) => {
 
     console.log(DATA_AI);
     console.log(DATA_AI.length);
-
 }
 
-async function run() {
+async function run1() {
 
     const browser = await puppeteer.launch({
         headless: false,
@@ -67,21 +66,30 @@ async function run() {
     await page.goto(URL_FOR_AI_NEWS);
     await scrapeInfiniteItems_news(page, 100);
 
+    await browser.close();
+}
+async function run2() {
+
+    const browser = await puppeteer.launch({
+        headless: false,
+        defaultViewport: false
+    });
+    const page = await browser.newPage();
+
     //For Getting the Tools
     await page.goto(URL_FOR_AI_TOOLS);
-    await scrapeInfiniteItems_tools(page, 200);
+    await scrapeInfiniteItems_tools(page, 150);
 
     await browser.close();
 }
 
-run();
-
-
 app.get('/', (req, res) => {
+    run1();
+    run2();
     res.json({
         "Welcome To": "AI HUB API to get Latest news and tools regarding Artificial Intelligence Technology",
-        "For AiNews": "Visit-> /LatestAiNews endpoint",
-        "For AiTools": "Visit-> /AiTools endpoint"
+        "For AiNews": "Visit-> '/LatestAiNews' endpoint",
+        "For AiTools": "Visit-> '/AiTools' endpoint"
     })
 });
 
