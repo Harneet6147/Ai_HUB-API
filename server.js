@@ -103,8 +103,6 @@ async function run2() {
 }
 
 app.get('/', (req, res) => {
-    run1();
-    run2();
     res.json({
         "Welcome To": "AI HUB API to get Latest news and tools regarding Artificial Intelligence Technology",
         "For AiNews": "Visit-> '/LatestAiNews' endpoint",
@@ -113,10 +111,12 @@ app.get('/', (req, res) => {
 });
 
 app.get('/LatestAiNews', (req, res) => {
+    run1();
     res.json(DATA_NEWS);
 });
 
 app.get('/AiTools', (req, res) => {
+    run2();
     res.json(DATA_AI);
 });
 
