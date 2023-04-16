@@ -25,21 +25,22 @@ const scrapeInfiniteItems_news = async (page, itemTargetCount, DATA_NEWS, res) =
 
 const Scrape_News = async (res, DATA_NEWS) => {
 
-    try {
-        const browser = await puppeteer.launch({
-            args: [
-                "--disable-setuid-sandbox",
-                "--no-sandbox",
-                "--single-process",
-                "--no-zygote",
-            ],
 
-            headless: false,
-            defaultViewport: false,
-            executablePath: process.env.NODE_ENV === 'production'
-                ? process.env.PUPPETEER_EXECUTABLE_PATH
-                : puppeteer.executablePath(),
-        });
+    const browser = await puppeteer.launch({
+        args: [
+            "--disable-setuid-sandbox",
+            "--no-sandbox",
+            "--single-process",
+            "--no-zygote",
+        ],
+
+        headless: false,
+        defaultViewport: false,
+        executablePath: process.env.NODE_ENV === 'production'
+            ? process.env.PUPPETEER_EXECUTABLE_PATH
+            : puppeteer.executablePath(),
+    });
+    try {
         const page = await browser.newPage();
 
         // For Getting the News
