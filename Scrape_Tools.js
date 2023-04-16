@@ -29,6 +29,7 @@ const Scrape_Tools = async (res, DATA_AI) => {
 
 
     const browser = await puppeteer.launch({
+        ignoreDefaultArgs: ['--disable-extensions'],
         args: [
             "--disable-setuid-sandbox",
             "--no-sandbox",

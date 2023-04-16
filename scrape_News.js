@@ -27,6 +27,7 @@ const Scrape_News = async (res, DATA_NEWS) => {
 
 
     const browser = await puppeteer.launch({
+        ignoreDefaultArgs: ['--disable-extensions'],
         args: [
             "--disable-setuid-sandbox",
             "--no-sandbox",
