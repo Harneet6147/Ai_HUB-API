@@ -46,7 +46,7 @@ const Scrape_Tools = async (res, DATA_AI) => {
         const page = await browser.newPage();
 
         //For Getting the Tools
-        await page.goto(URL_FOR_AI_TOOLS);
+        await page.goto(URL_FOR_AI_TOOLS, { timeout: 0 });
         await scrapeInfiniteItems_tools(page, 150, DATA_AI, res);
     }
     catch (err) {

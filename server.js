@@ -14,8 +14,8 @@ app.use(express.json());
 app.get('/', (req, res) => {
     res.json({
         "Welcome To": "AI HUB API to get Latest news and tools regarding Artificial Intelligence Technology",
-        "For AiNews": "Visit-> '/LatestAiNews' endpoint",
-        "For AiTools": "Visit-> '/AiTools' endpoint"
+        "For AiNews": "Visit-> '/LatestAiNews' endpoint  [Server is slow. May take 2-3 min]",
+        "For AiTools": "Visit-> '/AiTools' endpoint [Server is slow. May take 2-3 min]"
     })
 });
 

@@ -45,7 +45,7 @@ const Scrape_News = async (res, DATA_NEWS) => {
         const page = await browser.newPage();
 
         // For Getting the News
-        await page.goto(URL_FOR_AI_NEWS);
+        await page.goto(URL_FOR_AI_NEWS, {timeout:0});
         await scrapeInfiniteItems_news(page, 100, DATA_NEWS, res);
     }
     catch (err) {
